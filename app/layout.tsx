@@ -3,6 +3,7 @@ import { Inter } from "next/font/google";
 import "./globals.css";
 import { FavoritesProvider } from "@/context/FavoritesContext";
 import Header from "@/components/Header";
+import Footer from "@/components/Footer";
 
 const inter = Inter({ subsets: ["latin"]});
 
@@ -20,12 +21,13 @@ export default function RootLayout({
     <html lang="en" suppressHydrationWarning>
       <body
         suppressHydrationWarning
-        className={`${inter.className} antialiased`}
+        className={`${inter.className} antialiased bg-neutral-200`}
       >
         <FavoritesProvider>
-          <main className="container mx-auto px-4 py-8 pb-20">
+          <main className="container mx-auto px-4 py-8">
             <Header />
             {children}
+            <Footer />
           </main>
         </FavoritesProvider>
       </body>

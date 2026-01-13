@@ -6,7 +6,7 @@ import Link from "next/link";
 
 export default function Header() {
   return (
-    <div className="flex items-center justify-between border-b-[0.5px] border-neutral-300 pb-4 mb-4">
+    <div className="flex items-center justify-between border-b-[0.5px] border-neutral-400/70 pb-4 mb-4">
       <div className="flex items-center gap-4">
         <TextAlignJustify className="size-4" />
         <Link href="" className="text-black font-medium">

@@ -14,7 +14,7 @@ export default function AddToFavoriteBtn({ id }: { id: number }) {
         toggleFavorite(id);
       }}
       className={`p-2 rounded-full transition-colors ${
-        favorite ? "bg-red-50 text-red-500" : "bg-white/80 text-gray-400 hover:bg-gray-100"
+        favorite ? "bg-red-50 text-red-500" : "bg-neutral-100 text-gray-400 hover:bg-gray-100"
       }`}
     >
       <Heart size={20} className={favorite ? "fill-current" : ""} />

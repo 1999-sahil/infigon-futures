@@ -18,7 +18,7 @@ export default async function ProductPage({ params }: Props) {
     if (!product) notFound();
 
     return (
-      <div className="max-w-4xl mx-auto pt-4">
+      <div className="max-w-8xl mx-auto pt-4">
         <Link href="/" className="inline-flex items-center text-gray-500 hover:text-blue-600 mb-6 transition-colors font-medium">
           <ArrowLeft size={18} className="mr-2" />
           Back to browsing
@@ -64,7 +64,7 @@ export default async function ProductPage({ params }: Props) {
               {product.description}
             </p>
 
-            <button className="w-full bg-gray-900 hover:bg-black text-white font-bold py-4 rounded-xl transition-all shadow-lg shadow-gray-200">
+            <button className="w-full bg-neutral-900 hover:bg-black text-white font-bold py-4 rounded-xl transition-all shadow-lg shadow-gray-200">
               Add to Cart
             </button>
           </div>
