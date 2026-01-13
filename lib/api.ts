@@ -3,39 +3,39 @@ import { Product } from "@/types/product";
 
 const BASE_URL = "https://fakestoreapi.com";
 
-/**
- * Shared fetch helper to handle errors gracefully during build time
- */
-async function fetcher<T>(endpoint: string): Promise<T | null> {
+export async function getProducts(): Promise<Product[]> {
   try {
-    const res = await fetch(`${BASE_URL}${endpoint}`, {
-      // Revalidate every hour (3600 seconds)
-      // This helps with performance and prevents hitting the API on every click
+    const res = await fetch(`${BASE_URL}/products`, {
+      // Revalidate every hour
       next: { revalidate: 3600 }, 
     });
-
-    if (!res.ok) {
-      console.warn(`API error at ${endpoint}: ${res.statusText}`);
-      return null;
-    }
-
-    return await res.json();
+    if (!res.ok) return []; 
+    return res.json();
   } catch (error) {
-    console.error(`Network error at ${endpoint}:`, error);
+    console.error("Fetch products error:", error);
+    return [];
+  }
+}
+
+export async function getProductById(id: string): Promise<Product | null> {
+  try {
+    const res = await fetch(`${BASE_URL}/products/${id}`);
+    if (!res.ok) return null;
+    return res.json();
+  } catch (error) {
     return null;
   }
 }
 
-export async function getProducts(): Promise<Product[]> {
-  const data = await fetcher<Product[]>("/products");
-  return data ?? []; // Return empty array instead of crashing if null
-}
-
-export async function getProductById(id: string): Promise<Product | null> {
-  return await fetcher<Product>(`/products/${id}`);
-}
-
 export async function getCategories(): Promise<string[]> {
-  const data = await fetcher<string[]>("/products/categories");
-  return data ?? []; // Return empty array if the API fails
+  try {
+    const res = await fetch(`${BASE_URL}/products/categories`, {
+      next: { revalidate: 3600 },
+    });
+    if (!res.ok) return [];
+    return res.json();
+  } catch (error) {
+    console.error("Fetch categories error:", error);
+    return [];
+  }
 }
