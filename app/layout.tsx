@@ -24,7 +24,7 @@ export default function RootLayout({
         className={`${inter.className} antialiased bg-neutral-200`}
       >
         <FavoritesProvider>
-          <main className="container mx-auto px-4 py-8">
+          <main className="container mx-auto px-4 py-4 md:py-6 overflow-x-hidden">
             <Header />
             {children}
             <Footer />
