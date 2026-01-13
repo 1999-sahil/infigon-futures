@@ -1,6 +1,19 @@
+import { getProducts, getCategories } from "@/lib/api";
+import ProductDashboard from "@/components/ProductDashboard";
 
-export default function Home() {
+export default async function Home() {
+  const [products, categories] = await Promise.all([
+    getProducts(),
+    getCategories(),
+  ]);
+
   return (
-    <div>Home </div>
+    <div className="space-y-8">
+      <header>
+        <h1 className="text-3xl font-bold tracking-tight text-gray-900">Product Explorer</h1>
+        <p className="text-gray-500 mt-2">Browse our collection of premium items.</p>
+      </header>
+      <ProductDashboard products={products} categories={categories} />
+    </div>
   );
 }
