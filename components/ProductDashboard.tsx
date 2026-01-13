@@ -3,7 +3,7 @@
 import { useState, useMemo } from "react";
 import { Product } from "@/types/product";
 import ProductCard from "./ProductCard";
-import { Search, Filter } from "lucide-react";
+import { Search, Filter, Heart } from "lucide-react";
 import { useFavorites } from "@/context/FavoritesContext";
 
 interface Props {
@@ -29,13 +29,16 @@ export default function ProductDashboard({ products, categories }: Props) {
   return (
     <div className="space-y-6">
       {/* Controls */}
-      <div className="sticky top-4 z-30 bg-white/80 backdrop-blur-md p-4 rounded-xl shadow-sm border border-gray-100 flex flex-col md:flex-row gap-4 justify-between">
+      <div className="sticky top-4 z-30 py-4 flex flex-col md:flex-row gap-4 justify-between">
         <div className="relative flex-1 max-w-md">
-          <Search className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400" size={18} />
+          <Search
+            className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400"
+            size={18}
+          />
           <input
             type="text"
             placeholder="Search products..."
-            className="w-full pl-10 pr-4 py-2 bg-gray-50 border-transparent focus:bg-white border focus:border-blue-500 rounded-lg outline-none transition-all"
+            className="w-full pl-10 pr-4 py-2 bg-white border-neutral-200/60 focus:bg-white border text-sm rounded-lg outline-none transition-all"
             value={search}
             onChange={(e) => setSearch(e.target.value)}
           />
@@ -44,34 +47,39 @@ export default function ProductDashboard({ products, categories }: Props) {
         <div className="flex gap-3">
           <div className="relative">
             <select
-              className="appearance-none pl-4 pr-10 py-2 bg-gray-50 border border-transparent rounded-lg focus:bg-white focus:border-blue-500 outline-none cursor-pointer"
+              className="appearance-none capitalize pl-4 pr-10 py-2 bg-white border border-neutral-200/60 hover:border-neutral-300 rounded-lg focus:bg-white outline-none cursor-pointer text-sm"
               value={category}
               onChange={(e) => setCategory(e.target.value)}
             >
               <option value="all">All Categories</option>
               {categories.map((c) => (
-                <option key={c} value={c}>{c}</option>
+                <option key={c} value={c}>
+                  {c}
+                </option>
               ))}
             </select>
-            <Filter className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-400 pointer-events-none" size={14} />
+            <Filter
+              className="absolute right-3 top-1/2 -translate-y-1/2 text-neutral-400 pointer-events-none"
+              size={14}
+            />
           </div>
 
           <button
             onClick={() => setShowFavorites(!showFavorites)}
-            className={`px-4 py-2 rounded-lg font-medium transition-colors border ${
+            className={`px-4 py-2 rounded-lg transition-colors bg-white border border-neutral-200/60 text-sm ${
               showFavorites
                 ? "bg-red-50 border-red-200 text-red-600"
-                : "bg-gray-50 border-transparent text-gray-600 hover:bg-gray-100"
+                : "hover:border-neutral-300"
             }`}
           >
-            {showFavorites ? "❤️ Saved" : "🤍 Saved"}
+            {showFavorites ? <span className="flex items-center gap-1"><Heart className="text-rose-500 size-4" /> Favorites</span> : <span className="flex items-center gap-1"><Heart className="text-neutral-400 size-4" /> Favorites</span>}
           </button>
         </div>
       </div>
 
       {/* Grid */}
       {filteredProducts.length > 0 ? (
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4">
           {filteredProducts.map((p) => (
             <ProductCard key={p.id} product={p} />
           ))}
@@ -79,8 +87,12 @@ export default function ProductDashboard({ products, categories }: Props) {
       ) : (
         <div className="text-center py-20 bg-gray-50 rounded-xl border border-dashed border-gray-200">
           <p className="text-gray-500">No products found.</p>
-          <button 
-            onClick={() => {setSearch(''); setCategory('all'); setShowFavorites(false)}}
+          <button
+            onClick={() => {
+              setSearch("");
+              setCategory("all");
+              setShowFavorites(false);
+            }}
             className="mt-2 text-blue-600 hover:underline font-medium"
           >
             Reset Filters
