@@ -1,36 +1,63 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# 📦 Product Explorer Dashboard
 
-## Getting Started
+A high-performance, production-grade product catalog built with **Next.js 16**, **TypeScript**, and **Tailwind CSS**. This project demonstrates clean architecture, efficient data fetching, and a mobile-first user experience.
 
-First, run the development server:
+---
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+## 🛠 Setup Instructions
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Follow these steps to get the project running locally:
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+1.  **Clone the repository**
+    ```bash
+    git clone [https://github.com/your-username/product-explorer.git](https://github.com/your-username/product-explorer.git)
+    cd product-explorer
+    ```
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+2.  **Install dependencies**
+    ```bash
+    npm install
+    ```
 
-## Learn More
+3.  **Launch development environment**
+    ```bash
+    npm run dev
+    ```
+    _Open [http://localhost:3000](http://localhost:3000) to view the app._
 
-To learn more about Next.js, take a look at the following resources:
+4.  **Production Build**
+    ```bash
+    npm run build
+    npm run start
+    ```
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+---
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+## ✨ Features Implemented
 
-## Deploy on Vercel
+### 🛒 Product Discovery
+- **Server-Side Fetching:** Leverages Next.js Server Components to fetch data from `fakestoreapi.com`, reducing client-side JavaScript.
+- **Client-Side Search:** Instant, real-time filtering by product title.
+- **Category Navigation:** Filter by category with a clean, controlled UI.
+- **Favorites (Persistent):** "Like" products to save them for later. State persists across sessions using `localStorage` and React Context.
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+### 📄 Detailed Views
+- **Dynamic Routing:** Implemented `/products/[id]` using Next.js dynamic segments.
+- **Metadata Support:** Optimized for SEO and sharing.
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+### 🎨 Design & UX
+- **Skeleton Loaders:** Prevents layout shift and provides visual feedback during data fetching.
+- **Responsive Grid:** Mobile-first layout using Tailwind's `grid-cols` (1 col on mobile, 4 cols on desktop).
+- **Error Handling:** Custom `error.tsx` and `not-found.tsx` boundaries to handle API failures gracefully.
+
+---
+
+## 🏗 Architecture & Design Decisions
+
+### Folder Structure
+```text
+├── app/              # Next.js App Router (Routes & Skeletons)
+├── components/       # UI Components (Atomic Design)
+├── context/          # Global State (Favorites Context)
+├── lib/              # API Client & Shared Utilities
+└── types/            # Centralized TypeScript Definitions
