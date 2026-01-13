@@ -13,9 +13,18 @@ export default async function Home() {
   // Handle cases where API returns empty data during build
   if (products.length === 0) {
     return (
-      <div className="flex flex-col items-center justify-center min-h-[60vh] text-center">
-        <h2 className="text-2xl font-bold text-gray-800">API is currently unavailable</h2>
-        <p className="text-gray-500 mt-2">Please refresh the page in a few moments.</p>
+      <div className="flex flex-col items-center justify-center min-h-[60vh] text-center p-6">
+        <div className="bg-orange-50 text-orange-600 p-4 rounded-full mb-4">⚠️</div>
+        <h2 className="text-2xl font-bold text-gray-800">API Connection Issue</h2>
+        <p className="text-gray-500 mt-2 mb-6 max-w-sm">
+          Vercel is having trouble reaching the product database. This is usually temporary.
+        </p>
+        <button 
+          onClick={() => window.location.reload()} 
+          className="px-6 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors"
+        >
+          Retry Connection
+        </button>
       </div>
     );
   }

@@ -3,11 +3,18 @@ import { Product } from "@/types/product";
 
 const BASE_URL = "https://fakestoreapi.com";
 
+const headers = {
+  'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36',
+  'Accept': 'application/json',
+};
+
 export async function getProducts(): Promise<Product[]> {
   try {
     const res = await fetch(`${BASE_URL}/products`, {
       // Revalidate every hour
       next: { revalidate: 3600 }, 
+      headers,
+      cache: 'no-store'
     });
     if (!res.ok) return []; 
     return res.json();
